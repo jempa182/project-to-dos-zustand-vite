@@ -6,11 +6,12 @@ import { useTodoStore } from '../stores/TodoStore'
 const InputWrapper = styled.form`
   width: 100%;
   margin-bottom: 24px;
+  position: relative;
 `
 
 const Input = styled.input`
   width: 100%;
-  padding: 20px 24px;
+  padding: 20px 80px 20px 24px; /* Extra padding på höger sida för knappen */
   background: rgb(171,255,45);
   border: none;
   border-radius: 50px;
@@ -24,6 +25,37 @@ const Input = styled.input`
 
   &:focus {
     outline: none;
+  }
+`
+
+const SubmitButton = styled.button`
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #3E0B9D;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2D0870;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: translateY(-50%);
   }
 `
 
@@ -48,6 +80,13 @@ export const TodoInput = () => {
         placeholder="Add a task.."
         aria-label="New todo input"
       />
+      <SubmitButton 
+        type="submit" 
+        disabled={!input.trim()}
+        aria-label="Add task"
+      >
+        Add
+      </SubmitButton>
     </InputWrapper>
   )
 }
